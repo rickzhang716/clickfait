@@ -6,7 +6,7 @@ const cors = require("cors");
 
 const app = express();
 
-var corsOptions = { origin: "http://localhost:8081" };
+var corsOptions = { origin: "https://myservicetwo-dot-clickfait.uw.r.appspot.com" };
 
 app.use(cors(corsOptions));
 //setup express app
@@ -21,9 +21,9 @@ db.sequelize.sync();
 //     console.log("Drop and re-sync db.");
 // });
 // //test home page
-// app.get("/", (req, res) => {
-//     res.send("Welcome to test PERN app.");
-// });
+app.get("/", (req, res) => {
+    res.send("Welcome to test PERN app.");
+});
 
 require("./app/routes/tutorial.routes")(app);
 
