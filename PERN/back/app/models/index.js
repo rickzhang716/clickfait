@@ -1,7 +1,7 @@
 const dbConfig = require("../serv.yaml");
 
 const Sequelize = require("sequelize");
-const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
+const sequelize = new Sequelize(dbConfig.DB_NAME, dbConfig.DB_USER, dbConfig.DB_PASS, {
     host: dbConfig.HOST,
     dialect: dbConfig.dialect,
 
