@@ -1,9 +1,8 @@
 const { default: axios } = require("axios");
-const { Http2ServerRequest } = require("http2");
 const db = require("../models");
 const Tutorial = db.tutorials;
 const Op = db.Sequelize.Op;
-const FormData = require('form-data')
+
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
     if (!req.body.title) {
