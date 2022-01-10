@@ -7,6 +7,7 @@ const FormData = require('form-data')
 // Create and Save a new Headline
 exports.create = (req, res) => {
     if (!req.body.title) {
+        console.log(req.body.title);
         res.status(400).send({
             message: "Content cannot be empty!"
         });
@@ -16,12 +17,15 @@ exports.create = (req, res) => {
     const headline = {
         title: req.body.title,
         description: req.body.description,
-        published: req.body.published ? req.body.published : false
+        published: req.body.published ? req.body.published : false,
+        clickbait: req.body.clickbait,
+        sentiment: req.body.sentiment
 
     };
 
     Headline.create(headline)
         .then(data => {
+            console.log(data);
             res.send(data);
         })
         .catch(err => {
@@ -159,7 +163,7 @@ exports.evaluate = async (req, res) => {
         .then(response => {
             data = response.data;
             // console.log(data);
-            res.send(`${data}`);
+            res.send(data);
         })
         .catch(error => {
             if (error.response) {

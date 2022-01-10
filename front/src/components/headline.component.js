@@ -17,7 +17,8 @@ export default class Headline extends Component {
                 title: "",
                 description: "",
                 published: false,
-                clickbait: "Not yet evaluated."
+                clickbait: "Not yet evaluated.",
+                sentiment: -1
             },
             message: ""
         };
@@ -69,7 +70,9 @@ export default class Headline extends Component {
             id: this.state.currentHeadline.id,
             title: this.state.currentHeadline.title,
             description: this.state.currentHeadline.description,
-            published: status
+            published: status,
+            clickbait: this.state.currentHeadline.clickbait,
+            sentiment: this.state.currentHeadline.sentiment
         };
 
         HeadlineDataService.update(this.state.currentHeadline.id, data)
@@ -119,12 +122,13 @@ export default class Headline extends Component {
         console.log(title);
         HeadlineDataService.evaluate(title)
             .then(response => {
-                console.log(response.data);
-                const clickbait = `${response.data}%`;
+                console.log(response.data['clickbait']);
+                console.log(response.data['sentiment']);
                 this.setState(prevState => ({
                     currentHeadline: {
                         ...prevState.currentHeadline,
-                        clickbait: clickbait
+                        clickbait: response.data['clickbait'],
+                        sentiment: response.data['sentiment']
                     }
                 }));
             })
@@ -174,9 +178,9 @@ export default class Headline extends Component {
                                 <label>
                                     <strong>Clickbait:</strong>
                                 </label>
-                                {currentHeadline.clickbait}
+                                {currentHeadline.clickbait !== "Not yet evaluated." ? `${(Math.round(currentHeadline.clickbait * 100) / 100).toFixed(2)}%` : currentHeadline.clickbait}
                             </div>
-
+                            {currentHeadline.clickbait > 50 ? <div>Emotion: {currentHeadline.sentiment * 100}%</div> : ""}
                         </form>
 
                         {currentHeadline.published ? (
@@ -204,7 +208,7 @@ export default class Headline extends Component {
                         <button
                             className="badge badge-danger mr-2 redbtn"
                             onClick={this.evaluate}
-                        >evaluate
+                        >Evaluate
                         </button>
                         <button
                             type="submit"

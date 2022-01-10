@@ -11,6 +11,9 @@ module.exports = (sequelize, Sequelize) => {
         },
         clickbait: {
             type: Sequelize.STRING
+        },
+        sentiment: {
+            type: Sequelize.STRING
         }
 
     });
