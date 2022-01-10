@@ -13,7 +13,8 @@
 .git
 .gitignore
 
-# Node.js dependencies:
-node_modules/
-
-public/
+# Python pycache:
+__pycache__/
+# Ignored by the build system
+/setup.cfg
+env/

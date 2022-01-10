@@ -1,0 +1,25 @@
+runtime: nodejs16 # or another supported version
+service: serv
+
+# env_variables:
+#   BUCKET_NAME: "example-gcs-bucket"
+#   DB_USER: postgres
+#   DB_PASS: htn
+#   DB_NAME: clickbait
+#   # e.g. my-awesome-project:us-central1:my-cloud-sql-instance
+#   INSTANCE_CONNECTION_NAME: clickfait:us-central1:clickbaittest
+
+# vpc_access_connector:
+#   name: projects/clickfait/locations/us-west1/connectors/clickfait
+
+
+
+handlers:
+- url: /(.*\..+)$
+  static_files: build/\1
+  upload: build/(.*\..+)$
+
+- url: /.*
+  static_files: build/index.html
+  upload: build/html
+  secure: always
