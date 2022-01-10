@@ -1,28 +1,28 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
+import HeadlineDataService from "../services/headline.service";
 import { Link } from "react-router-dom";
 
-export default class TutorialsList extends Component {
+export default class HeadlinesList extends Component {
     constructor(props) {
         super(props);
         this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
-        this.retrieveTutorials = this.retrieveTutorials.bind(this);
+        this.retrieveHeadlines = this.retrieveHeadlines.bind(this);
         this.refreshList = this.refreshList.bind(this);
-        this.setActiveTutorial = this.setActiveTutorial.bind(this);
-        this.removeAllTutorials = this.removeAllTutorials.bind(this);
+        this.setActiveHeadline = this.setActiveHeadline.bind(this);
+        this.removeAllHeadlines = this.removeAllHeadlines.bind(this);
         this.searchTitle = this.searchTitle.bind(this);
 
 
         this.state = {
-            tutorials: [],
-            currentTutorial: null,
+            headlines: [],
+            currentHeadline: null,
             currentIndex: -1,
             searchTitle: ""
         };
     }
 
     componentDidMount() {
-        this.retrieveTutorials();
+        this.retrieveHeadlines();
     }
 
     onChangeSearchTitle(e) {
@@ -33,11 +33,11 @@ export default class TutorialsList extends Component {
         });
     }
 
-    retrieveTutorials() {
-        TutorialDataService.getAll()
+    retrieveHeadlines() {
+        HeadlineDataService.getAll()
             .then(response => {
                 this.setState({
-                    tutorials: response.data
+                    headlines: response.data
                 });
                 console.log(response.data);
             })
@@ -47,22 +47,22 @@ export default class TutorialsList extends Component {
     }
 
     refreshList() {
-        this.retrieveTutorials();
+        this.retrieveHeadlines();
         this.setState({
-            currentTutorial: null,
+            currentHeadline: null,
             currentIndex: -1
         });
     }
 
-    setActiveTutorial(tutorial, index) {
+    setActiveHeadline(headline, index) {
         this.setState({
-            currentTutorial: tutorial,
+            currentHeadline: headline,
             currentIndex: index
         });
     }
 
-    removeAllTutorials() {
-        TutorialDataService.deleteAll()
+    removeAllHeadlines() {
+        HeadlineDataService.deleteAll()
             .then(response => {
                 console.log(response.data);
                 this.refreshList();
@@ -73,10 +73,10 @@ export default class TutorialsList extends Component {
     }
 
     searchTitle() {
-        TutorialDataService.findByTitle(this.state.searchTitle)
+        HeadlineDataService.findByTitle(this.state.searchTitle)
             .then(response => {
                 this.setState({
-                    tutorials: response.data
+                    headlines: response.data
                 });
                 console.log(response.data);
             })
@@ -88,7 +88,7 @@ export default class TutorialsList extends Component {
 
 
     render() {
-        const { searchTitle, tutorials, currentTutorial, currentIndex } = this.state;
+        const { searchTitle, headlines, currentHeadline, currentIndex } = this.state;
 
         return (
             <div className="list row">
@@ -113,57 +113,63 @@ export default class TutorialsList extends Component {
                     </div>
                 </div>
                 <div className="col-md-6">
-                    <h4>Tutorials List</h4>
+                    <h4>Articles List</h4>
 
                     <ul className="list-group">
-                        {tutorials &&
-                            tutorials.map((tutorial, index) => (
+                        {headlines &&
+                            headlines.map((headline, index) => (
                                 <li
                                     className={
                                         "list-group-item " +
                                         (index === currentIndex ? "active" : "")
                                     }
-                                    onClick={() => this.setActiveTutorial(tutorial, index)}
+                                    onClick={() => this.setActiveHeadline(headline, index)}
                                     key={index}
                                 >
-                                    {tutorial.title}
+                                    {headline.title}
                                 </li>
                             ))}
                     </ul>
 
                     <button
                         className="m-3 btn btn-sm btn-danger"
-                        onClick={this.removeAllTutorials}
+                        onClick={this.removeAllHeadlines}
                     >
                         Remove All
                     </button>
                 </div>
                 <div className="col-md-6">
-                    {currentTutorial ? (
+                    {currentHeadline ? (
                         <div>
-                            <h4>Tutorial</h4>
+                            <h4>News Headline</h4>
                             <div>
                                 <label>
                                     <strong>Title:</strong>
                                 </label>{" "}
-                                {currentTutorial.title}
+                                {currentHeadline.title}
                             </div>
                             <div>
                                 <label>
                                     <strong>Description:</strong>
                                 </label>{" "}
-                                {currentTutorial.description}
+                                {currentHeadline.description}
                             </div>
                             <div>
                                 <label>
                                     <strong>Status:</strong>
                                 </label>{" "}
-                                {currentTutorial.published ? "Published" : "Pending"}
+                                {currentHeadline.published ? "Published" : "Pending"}
+                            </div>
+                            <div>
+                                <label>
+                                    <strong>Chance of Clickbait:</strong>
+                                </label>{" "}
+                                {currentHeadline.clickbait}
                             </div>
 
                             <Link
-                                to={"/tutorials/" + currentTutorial.id}
-                                className="badge badge-warning editbutton btn"
+                                to={"/headlines/" + currentHeadline.id}
+                                className="m-3 btn btn-sm editbutton border"
                             >
                                 Edit
                             </Link>
@@ -171,7 +177,7 @@ export default class TutorialsList extends Component {
                     ) : (
                         <div>
                             <br />
-                            <p>Please click on a Tutorial...</p>
+                            <p>Please click on an Article...</p>
                         </div>
                     )}
                 </div>

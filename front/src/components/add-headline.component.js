@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
+import HeadlineDataService from "../services/headline.service";
 
-export default class AddTutorial extends Component {
+export default class AddHeadline extends Component {
     constructor(props) {
         super(props);
         this.onChangeTitle = this.onChangeTitle.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
-        this.saveTutorial = this.saveTutorial.bind(this);
-        this.newTutorial = this.newTutorial.bind(this);
+        this.saveHeadline = this.saveHeadline.bind(this);
+        this.newHeadline = this.newHeadline.bind(this);
 
         this.state = {
             id: null,
@@ -30,14 +30,14 @@ export default class AddTutorial extends Component {
             description: e.target.value
         });
     }
-    saveTutorial() {
+    saveHeadline() {
         var data = {
             title: this.state.title,
             description: this.state.description
         };
 
 
-        TutorialDataService.create(data)
+        HeadlineDataService.create(data)
             .then(response => {
                 this.setState({
                     id: response.data.id,
@@ -55,7 +55,7 @@ export default class AddTutorial extends Component {
 
     }
 
-    newTutorial() {
+    newHeadline() {
         this.setState({
             id: null,
             title: "",
@@ -72,7 +72,7 @@ export default class AddTutorial extends Component {
                 {this.state.submitted ? (
                     <div>
                         <h4>You submitted successfully!</h4>
-                        <button className="btn btn-success" onClick={this.newTutorial}>
+                        <button className="btn btn-success" onClick={this.newHeadline}>
                             Add
                         </button>
                     </div>
@@ -104,7 +104,7 @@ export default class AddTutorial extends Component {
                             />
                         </div>
 
-                        <button onClick={this.saveTutorial} className="btn btn-success">
+                        <button onClick={this.saveHeadline} className="btn btn-success">
                             Submit
                         </button>
                     </div>

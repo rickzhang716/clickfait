@@ -24,7 +24,7 @@ db.sequelize.sync();
 //     res.send("Welcome to test PERN app.");
 // });
 
-require("./app/routes/tutorial.routes")(app);
+require("./app/routes/headline.routes")(app);
 
 //set port, listen for requests
 const PORT = process.env.PORT || 8080;

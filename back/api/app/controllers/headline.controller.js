@@ -1,10 +1,10 @@
 const { default: axios } = require("axios");
 const { Http2ServerRequest } = require("http2");
 const db = require("../models");
-const Tutorial = db.tutorials;
+const Headline = db.headlines;
 const Op = db.Sequelize.Op;
 const FormData = require('form-data')
-// Create and Save a new Tutorial
+// Create and Save a new Headline
 exports.create = (req, res) => {
     if (!req.body.title) {
         res.status(400).send({
@@ -13,69 +13,70 @@ exports.create = (req, res) => {
         return;
     }
 
-    const tutorial = {
+    const headline = {
         title: req.body.title,
         description: req.body.description,
         published: req.body.published ? req.body.published : false
+
     };
 
-    Tutorial.create(tutorial)
+    Headline.create(headline)
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
-                message: err.message || "Some error occured when creating the tutorial."
+                message: err.message || "Some error occured when saving the headline."
             });
         });
 
 
 };
 
-// Retrieve all Tutorials from the database.
+// Retrieve all Headlines from the database.
 exports.findAll = (req, res) => {
     const title = req.query.title;
     var condition = title ? { title: { [Op.iLike]: `%${title}%` } } : null;
 
 
-    Tutorial.findAll({ where: condition })
+    Headline.findAll({ where: condition })
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
-                message: err.message || "Some error occurred while retrieving tutorials."
+                message: err.message || "Some error occurred while retrieving headlines."
             });
         });
 
 };
 
-// Find a single Tutorial with an id
+// Find a single Headline with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
 
-    Tutorial.findByPk(id)
+    Headline.findByPk(id)
         .then(data => {
             if (data) {
                 res.send(data);
             } else {
                 res.status(404).send({
-                    message: `Cannot find tutorial with id ${id}.`
+                    message: `Cannot find headline with id ${id}.`
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error retrieving tutorial with id " + id
+                message: "Error retrieving headline with id " + id
             });
         });
 };
 
-// Update a Tutorial by the id in the request
+// Update a Headline by the id in the request
 exports.update = (req, res) => {
     const id = req.params.id;
 
-    Tutorial.update(req.body, {
+    Headline.update(req.body, {
         where: { id: id }
     })
         .then(num => {
@@ -85,64 +86,64 @@ exports.update = (req, res) => {
                 });
             } else {
                 res.send({
-                    message: `Cannot update with id ${id}. Tutorial might not be found or req.body was empty.`
+                    message: `Cannot update the article with id ${id}. Headline might not be found or req.body was empty.`
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error updating tutorial with id " + id
+                message: "Error updating headline with id " + id
             });
         });
 };
 
-// Delete a Tutorial with the specified id in the request
+// Delete a Headline with the specified id in the request
 exports.delete = (req, res) => {
     const id = req.params.id;
 
-    Tutorial.destroy({
+    Headline.destroy({
         where: { id: id }
     })
         .then(num => {
             if (num == 1) {
-                res.send({ message: "Tutorial was deleted successfully." });
+                res.send({ message: "Headline was deleted successfully." });
             } else {
                 res.send({
-                    message: `Could not delete tutorial with id ${id}. Tutorial might not be found or req.body was empty.`
+                    message: `Could not delete headline with id ${id}. Headline might not be found or req.body was empty.`
                 })
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Could not delter Tutorial with id " + id
+                message: "Could not delter Headline with id " + id
             });
         });
 };
 
-// Delete all Tutorials from the database.
+// Delete all Headlines from the database.
 exports.deleteAll = (req, res) => {
-    Tutorial.destroy({
+    Headline.destroy({
         where: {},
         truncate: false
     })
         .then(nums => {
-            res.send({ message: `${nums} tutorials were deleted successfully.` })
+            res.send({ message: `${nums} articles were deleted successfully.` })
         })
         .catch(err => {
             res.status(500).send({
-                message: err.message || "Some error occurred while removing all tutorials."
+                message: err.message || "Some error occurred while removing all saved articles."
             });
         });
 };
 
-// Find all published Tutorials
+// Find all published Headlines
 exports.findAllPublished = (req, res) => {
-    Tutorial.findAll({ where: { published: true } })
+    Headline.findAll({ where: { published: true } })
         .then(data => {
             res.send(data);
         })
         .catch(err => {
-            res.status(500).send({ message: err.message || "Some error occurred while retrieving tutorials." })
+            res.status(500).send({ message: err.message || "Some error occurred while retrieving saved articles." })
         })
 };
 
