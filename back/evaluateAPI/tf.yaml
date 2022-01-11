@@ -1,3 +1,0 @@
-runtime: python38
-vpc_access_connector:
-  name: projects/clickfait/locations/us-west1/connectors/clickfait
