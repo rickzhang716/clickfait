@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import HeadlineDataService from "../services/headline.service";
+import { Link } from "react-router-dom";
+
 
 export default class AddHeadline extends Component {
     constructor(props) {
@@ -96,9 +98,15 @@ export default class AddHeadline extends Component {
                 {this.state.submitted ? (
                     <div>
                         <h4>You submitted successfully!</h4>
-                        <button className="btn btn-success" onClick={this.newHeadline}>
+                        <button className="btn btn-success mr-3 space" onClick={this.newHeadline}>
                             Add
                         </button>
+                        <Link
+                            to={"/headlines/"}
+                            className=" btn btn-primary space"
+                        >
+                            Back
+                        </Link>
                     </div>
                 ) : (
                     <div>
