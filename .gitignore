@@ -1,6 +1,7 @@
 node_modules
 db.config.js
 keys/
+.flaskenv
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

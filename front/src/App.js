@@ -12,10 +12,12 @@ class App extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <a href="/headlines" className="navbar-brand">
-            Rickzhang
+        <nav className="navbar navbar-expand navbar-dark bg-dark ">
+
+          <a href="/headlines" className="  navbar-brand maintitle ">
+            Clickfait
           </a>
+
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
               <Link to={"/headlines"} className="nav-link">
@@ -32,7 +34,7 @@ class App extends Component {
 
         <div className="container mt-3">
           <Switch>
-            <Route exact path={["/", "/headlines"]} component={HeadlinesList} />
+            <Route exact path={["/", "/headline", "/headlines", "/headlines/saved"]} component={HeadlinesList} />
             <Route exact path="/add" component={AddHeadline} />
             <Route path="/headlines/:id" component={Headline} />
           </Switch>

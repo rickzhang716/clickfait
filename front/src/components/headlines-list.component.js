@@ -164,9 +164,9 @@ export default class HeadlinesList extends Component {
                                 <label>
                                     <strong>Chance of Clickbait:</strong>
                                 </label>{" "}
-                                {currentHeadline.clickbait !== "Not yet evaluated." ? `${(Math.round(currentHeadline.clickbait * 100) / 100).toFixed(2)}%` : this.state.clickbait}
+                                {currentHeadline.clickbait !== "Not yet evaluated." ? `${(Math.round(currentHeadline.clickbait * 100) / 100).toFixed(2)}%` : "Not yet evaluated."}
                             </div>
-                            {currentHeadline.clickbait > "50" ? <div>Emotion: {currentHeadline.sentiment * 100}%</div> : ""}
+                            {currentHeadline.clickbait > 50 ? <div>Emotion: {currentHeadline.sentiment * 100}%</div> : ""}
                             <Link
                                 to={"/headlines/" + currentHeadline.id}
                                 className="m-3 btn btn-sm editbutton border"

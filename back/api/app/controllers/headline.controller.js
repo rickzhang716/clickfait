@@ -7,7 +7,7 @@ const FormData = require('form-data')
 // Create and Save a new Headline
 exports.create = (req, res) => {
     if (!req.body.title) {
-        console.log(req.body.title);
+        console.log();
         res.status(400).send({
             message: "Content cannot be empty!"
         });
@@ -58,13 +58,14 @@ exports.findAll = (req, res) => {
 // Find a single Headline with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
-
     Headline.findByPk(id)
         .then(data => {
             if (data) {
+                console.log(data.title)
                 res.send(data);
             } else {
-                res.status(404).send({
+                console.log("error")
+                res.status(404).json({
                     message: `Cannot find headline with id ${id}.`
                 });
             }
@@ -141,14 +142,25 @@ exports.deleteAll = (req, res) => {
 };
 
 // Find all published Headlines
-exports.findAllPublished = (req, res) => {
+exports.findAllSaved = (req, res) => {
     Headline.findAll({ where: { published: true } })
         .then(data => {
-            res.send(data);
+            if (data) {
+                console.log(data)
+                res.send(data);
+            } else {
+                console.log("error")
+                res.status(404).json({
+                    message: "Cannot find any saved articles."
+                });
+            }
         })
         .catch(err => {
-            res.status(500).send({ message: err.message || "Some error occurred while retrieving saved articles." })
-        })
+            res.status(500).send({
+                message: "Error retrieving saved articles."
+            });
+        });
+
 };
 
 

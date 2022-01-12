@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import HeadlineDataService from "../services/headline.service";
 
 export default class Headline extends Component {
@@ -20,7 +21,8 @@ export default class Headline extends Component {
                 clickbait: "Not yet evaluated.",
                 sentiment: -1
             },
-            message: ""
+            message: "",
+            redirect: false
         };
     }
 
@@ -60,8 +62,11 @@ export default class Headline extends Component {
                 });
                 console.log(response.data);
             })
+
             .catch(e => {
-                console.log(e);
+                alert(e.response.data.message);
+                this.setState({ redirect: true });
+                console.log(e.response.data.message);
             });
     }
 
@@ -139,6 +144,11 @@ export default class Headline extends Component {
 
 
     render() {
+
+        const { redirect } = this.state;
+        if (redirect === true) {
+            return <Redirect to="/" />
+        }
         const { currentHeadline } = this.state;
 
         return (

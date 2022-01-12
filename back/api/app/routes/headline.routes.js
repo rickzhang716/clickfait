@@ -9,7 +9,7 @@ module.exports = app => {
 
     router.get("/", headlines.findAll);
 
-    router.get("/published", headlines.findAllPublished);
+    router.get("/saved", headlines.findAllSaved);
 
     router.get("/:id", headlines.findOne);
 

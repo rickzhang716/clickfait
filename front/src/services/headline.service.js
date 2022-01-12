@@ -5,7 +5,9 @@ class HeadlineDataService {
     getAll() {
         return http.get("/headlines");
     }
-
+    getSaved() {
+        return http.get("/headlines/saved")
+    }
     get(id) {
         return http.get(`/headlines/${id}`);
     }
