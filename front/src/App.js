@@ -6,6 +6,8 @@ import './App.css';
 import AddHeadline from "./components/add-headline.component";
 import Headline from "./components/headline.component";
 import HeadlinesList from "./components/headlines-list.component";
+import AboutUs from "./components/about-us.component"
+
 
 class App extends Component {
 
@@ -29,6 +31,11 @@ class App extends Component {
                 Add
               </Link>
             </li>
+            <li className="nav-item">
+              <Link to={"/about"} className="nav-link">
+                About
+              </Link>
+            </li>
           </div>
         </nav>
 
@@ -37,6 +44,7 @@ class App extends Component {
             <Route exact path={["/", "/headline", "/headlines", "/headlines/saved"]} component={HeadlinesList} />
             <Route exact path="/add" component={AddHeadline} />
             <Route path="/headlines/:id" component={Headline} />
+            <Route exact path={["/about", "/About"]} component={AboutUs} />
           </Switch>
         </div>
       </div>
