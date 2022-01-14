@@ -7,7 +7,7 @@ import AddHeadline from "./components/add-headline.component";
 import Headline from "./components/headline.component";
 import HeadlinesList from "./components/headlines-list.component";
 import AboutUs from "./components/about-us.component"
-
+import Landing from "./components/landing-page.component";
 
 class App extends Component {
 
@@ -16,7 +16,7 @@ class App extends Component {
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark ">
 
-          <a href="/headlines" className="  navbar-brand maintitle ">
+          <a href="/" className="  navbar-brand maintitle ">
             Clickfait
           </a>
 
@@ -36,15 +36,21 @@ class App extends Component {
                 About
               </Link>
             </li>
+            <li className="nav-item">
+              <Link to={"/"} className="nav-link">
+                Land
+              </Link>
+            </li>
           </div>
         </nav>
 
         <div className="container mt-3">
           <Switch>
-            <Route exact path={["/", "/headline", "/headlines", "/headlines/saved"]} component={HeadlinesList} />
+            <Route exact path={["/headline", "/headlines", "/headlines/saved"]} component={HeadlinesList} />
             <Route exact path="/add" component={AddHeadline} />
             <Route path="/headlines/:id" component={Headline} />
             <Route exact path={["/about", "/About"]} component={AboutUs} />
+            <Route exact path="/" component={Landing} />
           </Switch>
         </div>
       </div>

@@ -93,23 +93,31 @@ export default class HeadlinesList extends Component {
         return (
             <div className="list row">
                 <div className="col-md-8">
-                    <div className="input-group mb-3">
-                        <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Search by title"
-                            value={searchTitle}
-                            onChange={this.onChangeSearchTitle}
-                        />
-                        <div className="input-group-append">
-                            <button
-                                className="btn btn-outline-secondary"
-                                type="button"
-                                onClick={this.searchTitle}
-                            >
-                                Search
-                            </button>
-                        </div>
+
+                    <div className="search-container">
+                        <form autoComplete="off" className="margin: 0px">
+                            <div className="form-group" >
+
+                                <input
+                                    type="text"
+                                    className="input-group"
+                                    placeholder="Search by title"
+                                    value={searchTitle}
+                                    onChange={this.onChangeSearchTitle}
+                                />
+                            </div>
+
+                            <div className="input-group-append">
+                                <button
+                                    className="btn btn-outline-secondary"
+                                    type="button"
+                                    onClick={this.searchTitle}
+                                >
+                                    Search
+                                </button>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
                 <div className="col-md-6">
@@ -147,12 +155,6 @@ export default class HeadlinesList extends Component {
                                     <strong>Title:</strong>
                                 </label>{" "}
                                 {currentHeadline.title}
-                            </div>
-                            <div>
-                                <label>
-                                    <strong>Description:</strong>
-                                </label>{" "}
-                                {currentHeadline.description}
                             </div>
                             <div>
                                 <label>
