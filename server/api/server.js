@@ -3,7 +3,6 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 // const { json } = require("stream/consumers");
 // const stream = require('stream');
-require('dotenv')
 
 const app = express();
 
