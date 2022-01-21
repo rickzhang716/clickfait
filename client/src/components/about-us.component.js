@@ -8,7 +8,10 @@ export default class Headline extends Component {
         return (
             <div className="col-md-12">
                 <h1>Clickfait</h1>
-                <h2>rick zhang</h2>
+                <h2>Rick Zhang</h2>
+                <p>
+                    <i>Clickfait</i> initially started as a hackathon project, but soon grew to be much more.
+                </p>
 
             </div>
         );

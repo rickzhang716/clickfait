@@ -16,7 +16,6 @@ export default class Headline extends Component {
             currentHeadline: {
                 id: null,
                 title: "",
-                description: "",
                 published: false,
                 clickbait: "Not yet evaluated.",
                 sentiment: -1
@@ -43,16 +42,6 @@ export default class Headline extends Component {
         });
     }
 
-    onChangeDescription(e) {
-        const description = e.target.value;
-
-        this.setState(prevState => ({
-            currentHeadline: {
-                ...prevState.currentHeadline,
-                description: description
-            }
-        }));
-    }
 
     getHeadline(id) {
         HeadlineDataService.get(id)
@@ -74,7 +63,6 @@ export default class Headline extends Component {
         var data = {
             id: this.state.currentHeadline.id,
             title: this.state.currentHeadline.title,
-            description: this.state.currentHeadline.description,
             published: status,
             clickbait: this.state.currentHeadline.clickbait,
             sentiment: this.state.currentHeadline.sentiment
@@ -165,16 +153,6 @@ export default class Headline extends Component {
                                     id="title"
                                     value={currentHeadline.title}
                                     onChange={this.onChangeTitle}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="description">Description</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="description"
-                                    value={currentHeadline.description}
-                                    onChange={this.onChangeDescription}
                                 />
                             </div>
 

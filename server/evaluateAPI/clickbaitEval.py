@@ -21,6 +21,7 @@ from flask import jsonify
 
 # . env/bin/activate
 app = Flask(__name__)
+GOOGLE_APPLICATION_CREDENTIALS = os.getenv("GOOGLE_KEY")
 
 
 @app.route("/")
@@ -42,6 +43,7 @@ def analyze_text_sentiment(text):
         magnitude=f"{sentiment.magnitude:.1}",
     )
     return results['score']
+
 
 vocab_size = 10000
 embedding_dim = 30
@@ -127,13 +129,12 @@ new_model.summary()
 model = new_model
 
 
-@app.route("/go", methods = ['GET','POST'])
+@app.route("/go", methods=['GET', 'POST'])
 def main():
     print(request.json["title"])
     text = []
     text.append(request.json["title"])
 
-  
     # text = ["I am going to buy a new car"]
     mySequence = tokenizer.texts_to_sequences(text)
     mySeqPadded = pad_sequences(
@@ -141,28 +142,22 @@ def main():
     # print(model.predict(mySeqPadded)[0, 0])
     ans = model.predict(mySeqPadded)
     ans = ans*100
-    sentiment =  abs(float(analyze_text_sentiment(text[0])))
+    sentiment = abs(float(analyze_text_sentiment(text[0])))
     print(sentiment)
-    if ans>50:
+    if ans > 50:
         print("true")
         ans = str(ans)
         answers = ans.strip("[] ")
-        response = {"clickbait":answers,"sentiment":sentiment}
+        response = {"clickbait": answers, "sentiment": sentiment}
         print(response)
     else:
         ans = str(ans)
         answers = ans.strip("[] ")
-        response = jsonify(clickbait=answers,sentiment=-1)
-    
+        response = jsonify(clickbait=answers, sentiment=-1)
+
     # print(answers)
     return response
     # return ("{:0.2f}".format(ans))
 
 # # print(main(["I am going to buy a new car",
 # #       "The patriots win over the seahawks 41-23"]))
-
-
-
-
-
-

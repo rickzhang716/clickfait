@@ -1,3 +1,6 @@
+
+
+
 .App {
   text-align: center;
 }
@@ -39,12 +42,11 @@
 
 .list {
   text-align: left;
-  max-width: 750px;
+  max-width: 1500px;
   margin: auto;
 }
 
 .submit-form {
-  max-width: 300px;
   margin: auto;
 }
 
@@ -79,4 +81,33 @@
 .space {
   margin-left:0.5rem;
   margin-right:.5rem;
+}
+
+.searchicon {
+background-color: white;
+border-right-color: white;
+border-top-right-radius: 0px ;
+border-bottom-right-radius: 0px ;
+margin: right -1px;
+}
+
+.searchbar {
+  border-left-color: white;
+  border-top-left-radius: 0px ;
+  border-bottom-left-radius: 0px ;
+  margin-left: -1px;
+}
+
+.searchbutton {
+  border-top-left-radius: 0px ;
+  border-bottom-left-radius: 0px ;
+  border-color: #ced4da;
+  
+}
+
+.clickbait {
+  font-size: xx-large;
+}
+.sentiment{
+  font-size: xx-large;
 }
