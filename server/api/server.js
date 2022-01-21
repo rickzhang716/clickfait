@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 // const { json } = require("stream/consumers");
 // const stream = require('stream');
+require('dotenv')
 
 const app = express();
 
@@ -20,9 +21,9 @@ db.sequelize.sync();
 //     console.log("Drop and re-sync db.");
 // });
 // //test home page
-// app.get("/", (req, res) => {
-//     res.send("Welcome to test PERN app.");
-// });
+app.get("/", (req, res) => {
+    res.send("Welcome to test PERN app.");
+});
 
 require("./app/routes/headline.routes")(app);
 

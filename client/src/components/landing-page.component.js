@@ -13,7 +13,8 @@ export default class Landing extends Component {
         this.saveHeadline = this.saveHeadline.bind(this);
         this.newHeadline = this.newHeadline.bind(this);
         this.evaluate = this.evaluate.bind(this);
-        this.clickbaitChance = this.clickbaitChance.bind(this);
+        this.clickbaitAnimation = this.clickbaitAnimation.bind(this);
+        this.emotionAnimation = this.emotionAnimation.bind(this);
 
         this.state = {
             id: null,
@@ -22,15 +23,15 @@ export default class Landing extends Component {
             submitted: false,
             clickbait: "Not yet evaluated.",
             sentiment: -1,
-            evaluated: false,
-            temp: 0
+            evaluated: false
         };
 
     }
 
     onChangeTitle(e) {
         this.setState({
-            title: e.target.value
+            title: e.target.value,
+            clickbait: "Not yet evaluated."
         });
     }
 
@@ -64,7 +65,9 @@ export default class Landing extends Component {
             title: "",
             published: false,
             submitted: false,
-            evaluated: false
+            evaluated: false,
+            clickbait: "Not yet evaluated.",
+            sentiment: -1,
         });
     }
     evaluate() {
@@ -89,9 +92,13 @@ export default class Landing extends Component {
         }
     }
 
-    clickbaitChance() {
+    clickbaitAnimation() {
         const clickbait = parseFloat(this.state.clickbait);
-        return <CountUp isCounting end={clickbait} decimalPlaces={2} decimalSeparator="." duration={3.2} />;
+        return <CountUp isCounting end={clickbait} decimalPlaces={2} decimalSeparator="." duration={2} />;
+    }
+    emotionAnimation() {
+        const sentiment = parseFloat(this.state.sentiment);
+        return <CountUp isCounting end={sentiment} decimalPlaces={2} decimalSeparator="." duration={2} />;
     }
 
     render() {
@@ -105,7 +112,7 @@ export default class Landing extends Component {
                     <div>
                         <h4>You saved successfully!</h4>
                         <button className="btn btn-success mr-3 space" onClick={this.newHeadline}>
-                            Save
+                            Back
                         </button>
                         <Link
                             to={"/headlines"}
@@ -149,14 +156,19 @@ export default class Landing extends Component {
                                             </button>
                                         </div>
                                     </div>
-                                    <div id="temp">
+                                    <div id="increasing" className="clickbait">
                                         {/* {this.state.clickbait !== "Not yet evaluated." ? `${(this.state.clickbait)}%` : ""} */}
-
-                                        {this.state.clickbait !== "Not yet evaluated." ? this.clickbaitChance() : ""}
-                                        {this.state.clickbait !== "Not yet evaluated." ? "%" : ""}
+                                        {this.state.clickbait !== "Not yet evaluated." ? `Your title "${this.state.title}" has a ` : ""}
+                                        {this.state.clickbait !== "Not yet evaluated." ? this.clickbaitAnimation() : ""}
+                                        {this.state.clickbait !== "Not yet evaluated." ? "% chance of being clickbait." : ""}
 
                                     </div>
-                                    {this.state.clickbait > 50 ? <div>Emotion: {this.state.sentiment}%</div> : ""}
+                                    <div className="sentiment">
+                                        {this.state.clickbait !== "Not yet evaluated." ? `The sentiment score of this clickbait-y title is: ` : ""}
+                                        {this.state.clickbait !== "Not yet evaluated." ? this.emotionAnimation() : ""}
+                                        {this.state.clickbait !== "Not yet evaluated." ? "%" : ""}
+                                    </div>
+
 
                                     <button onClick={this.saveHeadline} className="btn btn-success my-4">
                                         Save
