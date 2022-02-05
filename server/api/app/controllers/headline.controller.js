@@ -57,6 +57,8 @@ exports.findAll = (req, res) => {
 
 // Find a single Headline with an id
 exports.findOne = (req, res) => {
+    console.log("FINDING ONE");
+
     const id = req.params.id;
     Headline.findByPk(id)
         .then(data => {
