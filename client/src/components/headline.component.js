@@ -167,7 +167,7 @@ export default class Headline extends Component {
                                 </label>
                                 {currentHeadline.clickbait !== "Not yet evaluated." ? `${(Math.round(currentHeadline.clickbait * 100) / 100).toFixed(2)}%` : currentHeadline.clickbait}
                             </div>
-                            {currentHeadline.clickbait > 50 ? <div>Emotion: {currentHeadline.sentiment * 100}%</div> : ""}
+                            {currentHeadline.clickbait > 50 ? <div>Emotion: {currentHeadline.sentiment}%</div> : ""}
                         </form>
 
                         {currentHeadline.published ? (
