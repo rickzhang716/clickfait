@@ -6,7 +6,6 @@ export default class Headline extends Component {
     constructor(props) {
         super(props);
         this.onChangeTitle = this.onChangeTitle.bind(this);
-        this.onChangeDescription = this.onChangeDescription.bind(this);
         this.getHeadline = this.getHeadline.bind(this);
         this.updatePublished = this.updatePublished.bind(this);
         this.updateHeadline = this.updateHeadline.bind(this);
