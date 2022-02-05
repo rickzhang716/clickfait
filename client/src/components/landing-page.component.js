@@ -31,7 +31,8 @@ export default class Landing extends Component {
     onChangeTitle(e) {
         this.setState({
             title: e.target.value,
-            clickbait: "Not yet evaluated."
+            clickbait: "Not yet evaluated.",
+            sentiment: -1
         });
     }
 
@@ -77,11 +78,17 @@ export default class Landing extends Component {
             HeadlineDataService.evaluate(title)
                 .then(response => {
                     // console.log(response.data['clickbait']);
-                    // console.log(response.data['sentiment']);
+                    console.log(response.data['sentiment']);
+
+
                     this.setState({
                         clickbait: (Math.round(response.data['clickbait'] * 100) / 100).toFixed(2),
                         sentiment: response.data['sentiment'] * 100
-                    });
+                    }
+
+
+
+                    );
                 })
                 .catch(err => {
                     console.log(err);
@@ -164,9 +171,9 @@ export default class Landing extends Component {
 
                                     </div>
                                     <div className="sentiment">
-                                        {this.state.clickbait !== "Not yet evaluated." ? `The sentiment score of this clickbait-y title is: ` : ""}
-                                        {this.state.clickbait !== "Not yet evaluated." ? this.emotionAnimation() : ""}
-                                        {this.state.clickbait !== "Not yet evaluated." ? "%" : ""}
+                                        {this.state.sentiment >= 0 ? `The sentiment score of this clickbait-y title is: ` : ""}
+                                        {this.state.sentiment >= 0 ? this.emotionAnimation() : ""}
+                                        {this.state.sentiment >= 0 ? "%" : ""}
                                     </div>
 
 

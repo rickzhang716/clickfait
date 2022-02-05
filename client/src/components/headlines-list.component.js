@@ -101,7 +101,7 @@ export default class HeadlinesList extends Component {
                                 <input
                                     type="text"
                                     className="input-group"
-                                    placeholder="Search by title"
+                                    placeholder="Filter by title"
                                     value={searchTitle}
                                     onChange={this.onChangeSearchTitle}
                                 />
