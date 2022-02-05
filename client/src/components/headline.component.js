@@ -44,6 +44,7 @@ export default class Headline extends Component {
 
     getHeadline(id) {
         console.log("gettingheadline....")
+        console.log(id);
         HeadlineDataService.get(id)
             .then(response => {
                 this.setState({
