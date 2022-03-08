@@ -10,7 +10,8 @@ export default class Headline extends Component {
                 <h1>Clickfait</h1>
                 <h2>Rick Zhang</h2>
                 <p>
-                    <i>Clickfait</i> initially started as a hackathon project, but soon grew to be much more.
+                    <i>Clickfait</i>
+                    Hi Cynthia
                 </p>
 
             </div>
