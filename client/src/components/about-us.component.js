@@ -11,8 +11,10 @@ export default class Headline extends Component {
                 <h2>Rick Zhang</h2>
                 <p>
                     <i>Clickfait</i>
-                    Hi Cynthia
                 </p>
+		<p>
+		Hi Cynthia and Renee
+		</p>
 
             </div>
         );
