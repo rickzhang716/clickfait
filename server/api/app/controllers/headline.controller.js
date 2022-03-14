@@ -171,7 +171,7 @@ exports.evaluate = async (req, res) => {
 
     const title = req.query.title;
     console.log(title);
-    axios.post('http://127.0.0.1:5000/go', {
+    axios.post('http://18.212.240.218:5000/go', {
         title: `${title}`
     })
         .then(response => {
