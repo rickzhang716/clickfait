@@ -12,9 +12,6 @@ export default class Headline extends Component {
                 <p>
                     <i>Clickfait</i>
                 </p>
-		<p>
-		Hi Cynthia and Renee
-		</p>
 
             </div>
         );
